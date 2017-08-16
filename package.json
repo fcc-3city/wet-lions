@@ -1,0 +1,19 @@
+{
+  "name": "gd-wody",
+  "version": "1.0.0",
+  "description": "Projekt trójmieskiego freeCodeCamp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcc-3city/gd-wody.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fcc-3city/gd-wody/issues"
+  },
+  "homepage": "https://github.com/fcc-3city/gd-wody#readme"
+}
