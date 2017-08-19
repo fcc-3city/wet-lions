@@ -34,7 +34,7 @@ Ta metoda jest używana aby pobrać listę wszystkich stacji które istnieją w 
 ]
 ```
 
-# [GET] /stations/{:id}
+# [GET] /stations/:id
 
 Ta metoda jest używana aby pobrać informacje na temat jednej stacji.
 
