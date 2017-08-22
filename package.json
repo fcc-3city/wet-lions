@@ -10,9 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "pg": "^7.1.2",
+    "pg-hstore": "^2.3.2"
   },
-  "devDependencies": {
-    "jasmine": "^2.7.0"
-  }
+  "devDependencies": {}
 }
