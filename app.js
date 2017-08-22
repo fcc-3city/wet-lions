@@ -1,23 +1,60 @@
+const harcodeJSON = ``
+
+const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 
-// ROUTES FOR OUR API
-// =============================================================================
-var router = express.Router(); // get an instance of the express Router
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-  res.json({
-    message: 'hooray! welcome to our api!'
-  });
-});
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// more routes for our API will happen here
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
-app.use('/api', router);
 
-app.listen(3000, function() {
-  console.log('listening on port 3000')
+app.get('/api/measurements', (req, res) => {
+    res.status(200)
+    res.set('Content-Type', 'application/json')
+    res.json([
+        {
+            "date": "2016-05-11 05:00:00",
+            "station_id": 0,
+            "temp": 20,
+            "water": 2,
+            "rain": 0.2,
+            "wind": {
+                "dir": "NE",
+                "level": 1
+            }
+        },
+        {
+            "date": "2016-05-11 06:00:00",
+            "station_id": 0,
+            "temp": 20,
+            "water": 2,
+            "rain": 0.2,
+            "wind": {
+                "dir": "NE",
+                "level": 1
+            }
+        },
+        {
+            "date": "2016-05-11 07:00:00",
+            "station_id": 0,
+            "temp": 20,
+            "water": 2,
+            "rain": 0.2,
+            "wind": {
+                "dir": "NE",
+                "level": 1
+            }
+        }
+    ])
+})
+
+app.listen(3000, () => {
+    console.log('listening on port 3000')
 })
