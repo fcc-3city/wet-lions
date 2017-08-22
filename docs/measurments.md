@@ -9,12 +9,12 @@ Zwraca pomiary stacji :station_id z dnia :date
 ```json
 [
   {
-    "date": 1480508280,
-        "station_id": "583d7bbbebb3ff000123f1ce",
-        "temp": null,
-        "water": null,
-        "rain": null,
-        "wind": null
+    "date": "1480508280",
+    "station_id": 0,
+    "temp": null,
+    "water": null,
+    "rain": null,
+    "wind": null
   }
 ]
 ```
