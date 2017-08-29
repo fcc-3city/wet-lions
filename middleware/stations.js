@@ -9,18 +9,18 @@ function fetchStations(callback) {
   fetch('http://pomiary.gdmel.pl/rest/stations')
     .then((res) => res.json())
     .then((json) => {
-      console.log(json);
+      // console.log(json);
 
       return json;
     }).then((json) => {
       const data = unenvelope(json);
       return data
     }).then((result) => {
-      console.log(result);
+      // console.log(result);
       for(item of result) {
-        console.log(item);
+        // console.log(item);
         const blargh = callback(item)
-        console.log(blargh);
+        // console.log(blargh);
       }
     });
 }
@@ -41,5 +41,5 @@ function stationsToModel(data) {
   return result
 }
 
-const data = fetchStations(stationsToModel);
-console.log(data);
+// const data = fetchStations(stationsToModel);
+// console.log(data);
