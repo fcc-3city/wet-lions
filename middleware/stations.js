@@ -35,7 +35,11 @@ function stationsToModel(data) {
   return result
 }
 
+// TODO: Better way to export?
+// module.exports = fetchStations;
+exports.fetchStations = fetchStations;
 
-const data = fetchStations().then((list) => {
-  console.log(list);
-})
+// NOTE: Test
+// const data = fetchStations().then((list) => {
+//   console.log(list);
+// })
