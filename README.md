@@ -1,4 +1,4 @@
-# Sample Text
+# Backend Sample Text
 
 Projekt trójmieskiego freeCodeCamp
 
@@ -7,22 +7,14 @@ Projekt trójmieskiego freeCodeCamp
 
 Jeżeli jesteś dodany jako kolabolator wystarczy że sklonujesz to repozytorium, jeżeli nie: sforkuj to repozytorium na swój profil, a następnie po wprowadeniu zmiań stwórz PR.
 
-1. W folderze z projektami:
-
-  - `git clone https://github.com/fcc-3city/gd-wody.git`
-  - `cd gd-wody`
-  - `npm install`
-
-2. Coś tam:
-**TODO**
-  - `npm dev` powinno zacząć serwer deweloperski, kiedyś...
-
-### User Story
-
-- [ ] Jako użytkownik jestem w stanie sprawdzić poziom wody wybranego zbiornika retencyjnego
-- [ ] Jako użytkownik jestem wstanie sprawdzić poziom wody w okresie czasy na przepięknym wykresiku
-
-_Myślę, że można rozszerzyć tę sekcję_
+1. **Zainstaluj**
+  ```bash
+git clone https://github.com/fcc-3city/gd-wody-backend.git
+cd gd-wody-backend
+npm install
+  ```
+2. **Zacznij pracę**  
+  `npm start` uruchamia serwer na localhost:3000
 
 ### Dokumentacja:
 Cele zamierzenia i marzenia: [Trello](https://trello.com/b/DMLojtTj/melioracja)
