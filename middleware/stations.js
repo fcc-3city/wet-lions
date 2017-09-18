@@ -1,26 +1,14 @@
 const fetch = require("node-fetch");
 
-function unenvelope(envelope) {
-  return envelope['data']
-}
-
 function fetchStations() {
   return fetch('http://pomiary.gdmel.pl/rest/stations')
-    .then((res) => res.json())
-    .then((json) => unenvelope(json))
-    .then((result) => {
-      let list = []
-
-      for(item of result) {
-        list.push(stationsToModel(item))
-      }
-
-      return list
-    });
+    .then(res => res.json())
+    .then(json => json.data)
+    .then(result => result.map(station => stationToModel(station)));
 }
 
-function stationsToModel(data) {
-  const result = {
+function stationToModel(data) {
+  return {
     id: data.no - 1,
     externalId: data.no,
     name: data.name,
@@ -31,15 +19,7 @@ function stationsToModel(data) {
       windDir: data.winddir,
       windLevel: data.windlevel
     }
-  }
-  return result
+  };
 }
 
-// TODO: Better way to export?
-// module.exports = fetchStations;
 exports.fetchStations = fetchStations;
-
-// NOTE: Test
-// const data = fetchStations().then((list) => {
-//   console.log(list);
-// })
