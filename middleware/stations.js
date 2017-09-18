@@ -40,6 +40,6 @@ function stationsToModel(data) {
 exports.fetchStations = fetchStations;
 
 // NOTE: Test
-const data = fetchStations().then((list) => {
-  console.log(list);
-})
+// const data = fetchStations().then((list) => {
+//   console.log(list);
+// })
