@@ -11,7 +11,6 @@ Zwraca pomiary stacji :station_id z dnia :date
   {
     "date": "2016-05-11 05:00:00",
     "station_id": 0,
-    "temp": 20,
     "water": 2,
     "rain": 0.2,
     "wind": {
@@ -22,7 +21,6 @@ Zwraca pomiary stacji :station_id z dnia :date
   {
     "date": "2016-05-11 06:00:00",
     "station_id": 0,
-    "temp": 20,
     "water": 2,
     "rain": 0.2,
     "wind": {
@@ -33,7 +31,6 @@ Zwraca pomiary stacji :station_id z dnia :date
   {
     "date": "2016-05-11 07:00:00",
     "station_id": 0,
-    "temp": 20,
     "water": 2,
     "rain": 0.2,
     "wind": {
