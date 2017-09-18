@@ -1,6 +1,6 @@
-const bodyParser = require('body-parser')
-const express = require('express')
-const app = express()
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
 
 const stations = require('./middleware/stations');
 
@@ -13,25 +13,21 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+// TODO: docs
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
 app.get('/api/stations', (req, res) => {
   console.log('fetch stations from original API');
   stations.fetchStations()
-    .then((data) => {
-      res.status(200)
-      res.set('Content-Type', 'application/json')
-      res.json(data)
-    })
-    .catch((err) => console.log(err))
-})
+    .then(data => res.json(data))
+    .catch(err => console.log(err));
+});
 
 
 app.get('/api/measurements', (req, res) => {
-  res.status(200)
-  res.set('Content-Type', 'application/json')
+  console.log('send hardcoded JSON');
   res.json([{
       "date": "2016-05-11 05:00:00",
       "station_id": 0,
@@ -65,9 +61,12 @@ app.get('/api/measurements', (req, res) => {
         "level": 1
       }
     }
-  ])
-})
+  ]);
+});
 
-app.listen(3000, () => {
-  console.log('listening on port 3000')
+
+// TODO: env var, nie mają sensu tak wcześnie, ale niech będzie
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 })
