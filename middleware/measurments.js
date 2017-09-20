@@ -10,7 +10,7 @@ function fetchMeasurments(stationId, date) {
       fetchMeasurmentsFromSensor(stationId, "windLevel", date),
     ])
     .then(sensors => [].concat(...sensors))
-    .then(data => groupByDate(data))
+    .then(data => groupByDate(data, stationId))
     .then(grouped => Object.keys(grouped).map(key => grouped[key]))
     .then(measurments => console.log(measurments))
 }
@@ -26,13 +26,13 @@ function fetchMeasurmentsFromSensor(stationId, sensor, date) {
 }
 
 
-function groupByDate(arr) {
+function groupByDate(arr, stationId) {
   let grouped = {}
   arr.forEach(elt => {
     if (elt.date.valueOf() in grouped) {
       grouped[elt.date.valueOf()] = merge(grouped[elt.date.valueOf()], elt)
     } else {
-      grouped[elt.date.valueOf()] = elt
+      grouped[elt.date.valueOf()] = merge({stationId}, elt)
     }
   })
   return grouped
