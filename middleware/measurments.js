@@ -11,7 +11,6 @@ function fetchMeasurments(stationId, date) {
     ])
     .then(sensors => [].concat(...sensors))
     .then(data => groupByDate(data, stationId))
-    .then(grouped => Object.keys(grouped).map(key => grouped[key]))
     .then(measurments => console.log(measurments))
 }
 
@@ -35,7 +34,7 @@ function groupByDate(arr, stationId) {
       grouped[elt.date.valueOf()] = merge({stationId}, elt)
     }
   })
-  return grouped
+  return Object.keys(grouped).map(key => grouped[key])
 }
 
 fetchMeasurments(0, moment().format("YYYY-MM-DD"))
