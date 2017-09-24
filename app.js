@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-const stations = require('./middleware/stations');
+const stations = require('./routes/stations');
 
 
 
@@ -18,12 +18,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/api/stations', (req, res) => {
-  console.log('fetch stations from original API');
-  stations.fetchStations()
-    .then(data => res.json(data))
-    .catch(err => console.log(err));
-});
+app.use('/api/stations', stations);
 
 
 app.get('/api/measurements', (req, res) => {
