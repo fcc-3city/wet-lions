@@ -2,16 +2,17 @@ const fetch = require("node-fetch");
 const moment = require('moment');
 const merge = require('merge');
 
+// expects stationId as number and date as moment.js object
 function fetchMeasurments(stationId, date) {
+  const dateStr = date.format("YYYY-MM-DD")
   return Promise.all([
-      fetchMeasurmentsFromSensor(stationId, "rain", date),
-      fetchMeasurmentsFromSensor(stationId, "water", date),
-      fetchMeasurmentsFromSensor(stationId, "windDir", date),
-      fetchMeasurmentsFromSensor(stationId, "windLevel", date),
+      fetchMeasurmentsFromSensor(stationId, "rain", dateStr),
+      fetchMeasurmentsFromSensor(stationId, "water", dateStr),
+      fetchMeasurmentsFromSensor(stationId, "windDir", dateStr),
+      fetchMeasurmentsFromSensor(stationId, "windLevel", dateStr),
     ])
     .then(sensors => [].concat(...sensors))
     .then(data => groupByDate(data, stationId))
-    .then(measurments => console.log(measurments))
 }
 
 function fetchMeasurmentsFromSensor(stationId, sensor, date) {
@@ -37,4 +38,4 @@ function groupByDate(arr, stationId) {
   return Object.keys(grouped).map(key => grouped[key])
 }
 
-fetchMeasurments(0, moment().format("YYYY-MM-DD"))
+module.exports = fetchMeasurments;
