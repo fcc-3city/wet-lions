@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 
 // TODO: docs
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.sendFile('index.html');
 });
 
 app.use('/api/stations', stations);
