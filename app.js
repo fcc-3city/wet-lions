@@ -14,11 +14,12 @@ app.use(bodyParser.json());
 
 // TODO: docs
 app.get('/', (req, res) => {
-  res.sendFile('index.html');
+ res.sendFile(__dirname + '/index.html');
 });
 
 app.use('/api/stations', stations);
 app.use('/api/measurments', measurments);
+app.use(express.static('public')) // serve static files
 
 // TODO: env var, nie mają sensu tak wcześnie, ale niech będzie
 const PORT = 3000;
