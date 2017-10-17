@@ -1,15 +1,24 @@
 $(document).ready(function() {
+
+	$('select').material_select();
+
+	// Zmień treść przycisku po kliknięciu na nazwę stacji
+	$('li').click(function() {
+		alert('dua');
+	});
 	
   // Initialize collapse button
   $(".button-collapse").sideNav();
   // Initialize collapsible (uncomment the line below if you use the dropdown variation)
   //$('.collapsible').collapsible();
 
-  // Populate sidebar with station names
+  // Populate select tag with station names
   $.getJSON(window.location + 'api/stations', function(json) {
-  	for(station of json) {
-  		$('#slide-out').append('<li><a href="#!">' + station.name + '</a></li>');
-  	}
+
+  	for(station of json) {  		
+  		$('.dropdown-content').append($('<li class><span></span></li>').val(station.name).html(station.name));
+  	};
+
   });
 
 
@@ -20,7 +29,7 @@ $(document).ready(function() {
   	let date = this.value.split("-").join('')
   	console.log(date);
 
-	  $.getJSON(window.location + 'api/measurments/0/' + date, function(json) {
+	  $.getJSON(window.location + 'api/measurments/3/' + date, function(json) {
 	  	
 
 	  	function parseDate() {
@@ -69,8 +78,8 @@ $(document).ready(function() {
 			    }
 			});	 
 
-	  });
-  })
+	  }); // end getJSON
+  }); // end date-picker change
 
 
 

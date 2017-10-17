@@ -1,5 +1,8 @@
+@import 'mixins';
+
 body {
 	#date-picker-div {
+		@include display(flex, center, center, wrap, column);
 		width: 20%;
 		margin: auto;
 	}	
