@@ -29,28 +29,15 @@
       </ul>
     </div>
   </nav>
-
-  <ul id="slide-out" class="side-nav">
-    <li><div class="user-view">
-      <div class="background">
-        <img src="images/office.jpg">
-      </div>
-    </div></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
+  
 
   <div id="date-picker-div">
-    <input type="date" id="date-picker">
-    <!-- Dropdown Trigger -->
-    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+  <form id='station-form' class='select-station' action="#">
+  </form>    
+    <input type="date" id="date-picker" class="select-station">
+    <!-- <select name="" id="station-list" class="select-station"></select> -->
+  </div>
 
-    <!-- Dropdown Structure -->
-    <ul id='dropdown1' class='dropdown-content'>
-
-    </ul>
-  </div>  
   <div class="chart">
     <canvas id="myChart" width="400" height="400"></canvas>
   </div>

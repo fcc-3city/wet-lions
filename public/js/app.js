@@ -1,35 +1,48 @@
 $(document).ready(function() {
 
+
+// MATERIALIZE JQUERY
 	$('select').material_select();
 
-	// Zmień treść przycisku po kliknięciu na nazwę stacji
-	$('li').click(function() {
-		alert('dua');
-	});
-	
-  // Initialize collapse button
-  $(".button-collapse").sideNav();
-  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-  //$('.collapsible').collapsible();
+  $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: true, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    }
+  );
 
-  // Populate select tag with station names
+// END MATERIALIZE JQUERY
+
+
+  
+
+  // Populate select tag with station names  
   $.getJSON(window.location + 'api/stations', function(json) {
 
   	for(station of json) {  		
-  		$('.dropdown-content').append($('<li class><span></span></li>').val(station.name).html(station.name));
+  		$('#station-form').append(`<p><input id=${station.id}_station value=${station.id} name='station' type='radio'/><label for=${station.id}_station>${station.name}</label></p>`);
   	};
-
   });
 
 
-
-
   // CHARTS
-  $('#date-picker').change(function() {
-  	let date = this.value.split("-").join('')
-  	console.log(date);
+  $('.select-station').change(function() {
+  	
 
-	  $.getJSON(window.location + 'api/measurments/3/' + date, function(json) {
+  	let date = $('#date-picker').val().split("-").join('')
+  	let station = $("input[type='radio']:checked").val()
+  	console.log(date);
+  	console.log(station)
+
+
+  	
+
+	  $.getJSON(window.location + `api/measurments/${station}/` + date, function(json) {
 	  	
 
 	  	function parseDate() {
