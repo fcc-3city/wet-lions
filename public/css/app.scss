@@ -1,6 +1,15 @@
 @import 'mixins';
 
 body {
+	.nav-wrapper {
+		@include display(flex, center, center, wrap, row);
+		width: 100%;
+		position: relative;
+		input {
+			max-width: 30%;
+			margin: auto 0;
+		}
+	}
 	#date-picker-div {
 		@include display(flex, center, center, wrap, column);
 		width: 20%;

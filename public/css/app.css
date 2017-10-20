@@ -1,3 +1,15 @@
+body .nav-wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  position: relative; }
+  body .nav-wrapper input {
+    max-width: 30%;
+    margin: auto 0; }
+
 body #date-picker-div {
   display: flex;
   justify-content: center;
