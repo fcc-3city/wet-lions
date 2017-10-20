@@ -39,9 +39,6 @@ $(document).ready(function() {
   	console.log(date);
   	console.log(station)
 
-
-  	
-
 	  $.getJSON(window.location + `api/measurments/${station}/` + date, function(json) {
 	  	
 

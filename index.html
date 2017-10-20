@@ -21,6 +21,7 @@
   <nav>
     <div class="nav-wrapper">
       <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Ścieki</a>
+      <input type="date" id="date-picker" class="select-station">
       <ul class="right hide-on-med-and-down">
         <li><a href="sass.html"><i class="material-icons">search</i></a></li>
         <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
@@ -29,17 +30,14 @@
       </ul>
     </div>
   </nav>
-  
+  <div id="wrapper">
+    <div id="sidebar">
+      <form id='station-form' class='select-station' action="#">  
+    </div>
 
-  <div id="date-picker-div">
-  <form id='station-form' class='select-station' action="#">
-  </form>    
-    <input type="date" id="date-picker" class="select-station">
-    <!-- <select name="" id="station-list" class="select-station"></select> -->
-  </div>
-
-  <div class="chart">
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <div class="chart">
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
   </div>
 
 

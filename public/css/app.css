@@ -6,3 +6,18 @@ body #date-picker-div {
   flex-direction: column;
   width: 20%;
   margin: auto; }
+
+body #wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  height: 100vh;
+  margin-right: 0; }
+  body #wrapper #sidebar {
+    max-width: 30%;
+    display: inline-block;
+    overflow: scroll; }
+  body #wrapper .chart {
+    width: 60%; }

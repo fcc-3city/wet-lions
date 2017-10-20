@@ -6,4 +6,17 @@ body {
 		width: 20%;
 		margin: auto;
 	}
+	#wrapper {
+		@include display(flex, space-between, center, wrap, row);
+		height: 100vh;
+		margin-right: 0;
+		#sidebar {
+			max-width: 30%;
+			display: inline-block;
+			overflow: scroll;
+		}
+		.chart {
+			width: 60%;
+		}
+	}
 }
