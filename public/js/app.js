@@ -64,8 +64,16 @@ $(document).ready(function() {
 				return waterLevels;
 			}
 
+			function getWindSpeed() {
+				const windSpeeds = [];
+				for(entry of json) {
+					windSpeeds.push(entry.windLevel)
+				}
+				return windSpeeds
+			}
 
-			var ctx = document.getElementById("myChart").getContext('2d');
+			// WATER LEVEL CHART
+			var ctx = document.getElementById("water-level").getContext('2d');
 			var myChart = new Chart(ctx, {
 			    type: 'line',
 			    data: {
@@ -86,8 +94,33 @@ $(document).ready(function() {
 			            }]
 			        }
 			    }
-			});	 
+			});	
+			// WATER LEVEL CHART END8 
 
+			// WIND SPEED CHART
+			var ctw = document.getElementById("wind-speed").getContext('2d');
+			var windChart = new Chart(ctw, {
+			    type: 'line',
+			    data: {
+			        labels: parseDate(),
+			        datasets: [{
+			            label: 'm/s',
+			            data: getWindSpeed(),
+			            backgroundColor:'rgba(255, 99, 132, 0.2)',		            
+			            borderWidth: 1
+			        }]
+			    },
+			    options: {
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero:true
+			                }
+			            }]
+			        }
+			    }
+			});				
+			// WIND SPEED CHART END
 	  }); // end getJSON
   }); // end date-picker change
 
