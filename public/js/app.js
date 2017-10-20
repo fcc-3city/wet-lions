@@ -21,11 +21,16 @@ $(document).ready(function() {
 
   
 
-  // Populate select tag with station names  
+  // Populate select tag with station names and define whether they're active 
   $.getJSON(window.location + 'api/stations', function(json) {
 
-  	for(station of json) {  		
-  		$('#station-form').append(`<p><input id=${station.id}_station value=${station.id} name='station' type='radio'/><label for=${station.id}_station>${station.name}</label></p>`);
+  	for(station of json) { 
+  		if(station.active == true) {
+  			$('#station-form').append(`<p><input id=${station.id}_station value=${station.id} name='station' type='radio'/><label for=${station.id}_station>${station.name} 🔆</label></p>`);	
+  		} else {
+  			$('#station-form').append(`<p><input id=${station.id}_station value=${station.id} name='station' type='radio'/><label for=${station.id}_station>${station.name} 🔴</label></p>`);
+  		}
+  		
   	};
   });
 
@@ -35,9 +40,7 @@ $(document).ready(function() {
   	
 
   	let date = $('#date-picker').val().split("-").join('')
-  	let station = $("input[type='radio']:checked").val()
-  	console.log(date);
-  	console.log(station)
+  	let station = $("input[type='radio']:checked").val();
 
 	  $.getJSON(window.location + `api/measurments/${station}/` + date, function(json) {
 	  	
@@ -59,7 +62,12 @@ $(document).ready(function() {
 			function getWaterLevel() {
 				const waterLevels = [];
 				for(entry of json) {
-					waterLevels.push(entry.water)
+					if(entry.water == 4000) {
+						entry.water = 0
+						waterLevels.push(entry.water)
+					} else {
+						waterLevels.push(entry.water)	
+					}					
 				}
 				return waterLevels;
 			}
@@ -67,7 +75,12 @@ $(document).ready(function() {
 			function getWindSpeed() {
 				const windSpeeds = [];
 				for(entry of json) {
-					windSpeeds.push(entry.windLevel)
+					if(entry.windLevel == 4000) {
+						entry.windLevel = 0
+						windSpeeds.push(entry.windLevel)
+					} else {
+						windSpeeds.push(entry.windLevel)
+					}					
 				}
 				return windSpeeds
 			}

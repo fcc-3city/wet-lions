@@ -16,16 +16,28 @@ body {
 		margin: auto;
 	}
 	#wrapper {
-		@include display(flex, space-between, center, wrap, row);
+		@include display(flex, flex-start, center, wrap, row);
 		height: 100vh;
 		margin-right: 0;
 		#sidebar {
+			margin-left: 20px;
 			max-width: 30%;
 			display: inline-block;
 			overflow: scroll;
+			margin-right: 75px;
 		}
-		.chart {
+		.charts {
+			@include display(flex, flex-start, center, wrap, row);
 			width: 60%;
+			max-height: 100vh;
+			.chart {
+				max-width: 450px;
+				canvas {
+					width: 450px;
+					max-width: 100%;
+					height: auto;
+				}
+			}
 		}
 	}
 }
