@@ -1,6 +1,12 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 const moment = require('moment');
 const merge = require('merge');
+
+function sanitize(elt) {
+  console.log(elt)
+  values = Object.keys(elt).map(key => elt[key])
+  return !(values.every(value => value >= 3999 || value === null))
+}
 
 // expects stationId as number and date as moment.js object
 function fetchMeasurments(stationId, date) {
@@ -12,6 +18,7 @@ function fetchMeasurments(stationId, date) {
       fetchMeasurmentsFromSensor(stationId, "windLevel", dateStr),
     ])
     .then(sensors => [].concat(...sensors))
+    .then(data => data.filter(elt => sanitize(elt)))
     .then(data => groupByDate(data, stationId))
 }
 
