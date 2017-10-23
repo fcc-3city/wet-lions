@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('#station-form')
           .append(`<li>
             <input id=${station.id}_station value=${station.id} name='station' type='radio'/>
-            <label for=${station.id}_station>${station.name}</label>
+            <label for=${station.id}_station>${station.active == true ? '🌧' : '🌤'} ${station.name}</label>
             </li>`)
       };
     })
