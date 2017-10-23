@@ -1,7 +1,9 @@
+
+
 body .nav-wrapper {
   display: flex;
-  justify-content: center;
-  align-content: center;
+  /*justify-content: center;*/
+  /*align-content: center;*/
   flex-wrap: wrap;
   flex-direction: row;
   width: 100%;
@@ -12,8 +14,8 @@ body .nav-wrapper {
 
 body #date-picker-div {
   display: flex;
-  justify-content: center;
-  align-content: center;
+  /*justify-content: center;*/
+  /*align-content: center;*/
   flex-wrap: wrap;
   flex-direction: column;
   width: 20%;
@@ -47,3 +49,6 @@ body #wrapper {
         width: 450px;
         max-width: 100%;
         height: auto; }
+
+
+
