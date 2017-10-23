@@ -18,23 +18,26 @@ $(document).ready(function () {
 
 // END MATERIALIZE JQUERY
 
+  function populateSideNav () {
   // Populate select tag with station names and define whether they're active
-  $.getJSON('/api/stations', function (json) {
-    for (station of json) {
-      $('#station-form')
+    $.getJSON('/api/stations', json => {
+      for (station of json) {
+        $('#station-form')
           .append(`<li>
             <input id=${station.id}_station value=${station.id} name='station' type='radio'/>
             <label for=${station.id}_station>${station.name}</label>
             </li>`)
-    };
-  })
+      };
+    })
+  }
+  populateSideNav()
 
   // CHARTS
   $('.select-station').change(function () {
-    let date = $('#date-picker').val().split('-').join('')
-    let station = $("input[type='radio']:checked").val()
+    const date = $('#date-picker').val().split('-').join('')
+    const station = $("input[type='radio']:checked").val()
 
-    $.getJSON(`/api/measurments/${station}/` + date, function (json) {
+    $.getJSON(`/api/measurments/${station}/${date}`, json => {
       function parseDate () {
         const labels = []
         for (entry of json) {
@@ -75,9 +78,15 @@ $(document).ready(function () {
         return windSpeeds
       }
 
+      $.getJSON(`/api/stations/${station}`, station => {
+        document.getElementById('station-header').innerHTML = `Stacja ${station.name}`
+        document.title = `🌧 ${station.name}`
+      })
+
       // WATER LEVEL CHART
+
       var ctx = document.getElementById('water-level').getContext('2d')
-      var myChart = new Chart(ctx, {
+      var waterChart = new Chart(ctx, {
         type: 'line',
         data: {
           labels: parseDate(),
