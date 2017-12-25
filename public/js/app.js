@@ -53,112 +53,98 @@ $(document).ready(function () {
   }
   populateSideNav()
 
+  function parseDate (entries) {
+    const labels = []
+    for (entry of entries) {
+      labels.push(entry.date.split('T')[1])
+    }
+    return labels
+  } // funkcja parsująca datę do używalnego formatu i dająca labele do wykresu
+
+  function getDatapoints (entries, sensor) {
+    const datapoints = []
+    for (entry of entries) {
+      datapoints.push(entry[sensor])
+    }
+    return datapoints
+  }
+
+  function makeChartMagic (id, chart, labels, data, header) {
+    const chartDiv = document.createElement('div')
+    const canvasDiv = document.createElement('canvas')
+
+    chartDiv.id = id
+    chartDiv.className = 'chart'
+    chartDiv.innerHTML = `<h4>${header}</h4>`
+
+    chart = new Chart(canvasDiv.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'm',
+          data: data,
+          backgroundColor: 'rgba(99, 99, 132, 0.5)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    })
+
+    chartDiv.appendChild(canvasDiv)
+    return chartDiv
+  }
+
     // CHARTS
   $('.select-station').change(function () {
     const date = $("input[name='date_submit']").val()
     const station = $("input[type='radio']:checked").val()
 
-    if (typeof date !== 'undefined' && typeof station !== 'undefined') {
-      console.log(`/api/measurments/${station}/${date}`)
-      $.getJSON(`/api/measurments/${station}/${date}`, json => {
-        console.log(json)
-        function parseDate () {
-          const labels = []
-          for (entry of json) {
-            let date = new Date(entry.date)
-            const labelDate = [date.getHours(), date.getMinutes()]
-                            .map((num) => `0${num}`.slice(-2))
-                            .join(':')
-            // console.log(labelDate)
-            labels.push(labelDate)
-          }
-          return labels
-        } // funkcja parsująca datę do używalnego formatu i dająca labele do wykresu
+    if ((typeof date !== 'undefined') && (typeof station !== 'undefined')) {
+      console.log(`fetch from /api/measurments/${station}/${date}`)
 
-        function getWaterLevel () {
-          const waterLevels = []
-          for (entry of json) {
-            if (entry.water == 4000) {
-              entry.water = 0
-              waterLevels.push(entry.water)
-            } else {
-              waterLevels.push(entry.water)
-            }
-          }
-          return waterLevels
-        }
-
-        function getWindSpeed () {
-          const windSpeeds = []
-          for (entry of json) {
-            if (entry.windLevel == 4000) {
-              entry.windLevel = 0
-              windSpeeds.push(entry.windLevel)
-            } else {
-              windSpeeds.push(entry.windLevel)
-            }
-          }
-          return windSpeeds
-        }
-
-        $.getJSON(`/api/stations/${station}`, station => {
+      fetch(`/api/stations/${station}`)
+        .then(res => res.json())
+        .then(station => {
           document.getElementById('station-header').innerHTML = `📡 ${station.name}`
           document.title = `🌧 ${station.name}`
         })
 
-                // WATER LEVEL CHART
+      fetch(`/api/measurments/${station}/${date}`)
+      .then(res => res.json())
+      .then(json => {
+        // console.log(json)
 
-        const ctx = document.getElementById('water-level').getContext('2d')
-        waterChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: parseDate(),
-            datasets: [{
-              label: 'm',
-              data: getWaterLevel(),
-              backgroundColor: 'rgba(99, 99, 132, 0.5)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
-        })
-                // WATER LEVEL CHART END8
+        const charts = document.getElementById('station-measurments')
+        charts.innerHTML = ''
 
-                // WIND SPEED CHART
-        const ctw = document.getElementById('wind-speed').getContext('2d')
-        windChart = new Chart(ctw, {
-          type: 'line',
-          data: {
-            labels: parseDate(),
-            datasets: [{
-              label: 'm/s',
-              data: getWindSpeed(),
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
-        })
-                // WIND SPEED CHART END
+        const dateLabels = parseDate(json)
+        // console.log(dateLabels)
+
+        const waterData = getDatapoints(json, 'water')
+        if (waterData.length > 0) {
+          charts.appendChild(makeChartMagic('water', waterChart, dateLabels, waterData, 'Poziom wody'))
+        }
+
+        const rainData = getDatapoints(json, 'rain')
+        if (rainData.length > 0) {
+          charts.appendChild(makeChartMagic('rain', waterChart, dateLabels, rainData, 'Opady deszczu'))
+        }
+
+        const windData = getDatapoints(json, 'windLevel')
+        if (windData.length > 0) {
+          charts.appendChild(makeChartMagic('wind-level', waterChart, dateLabels, windData, 'Siła wiatru'))
+        }
       }) // end getJSON
     }
   }) // end date-picker change
-
     // CHARTS END
 })
