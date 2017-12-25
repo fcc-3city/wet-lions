@@ -25,7 +25,7 @@ $(document).ready(function () {
     clear: 'Wyczyść',
     close: 'Ok',
     closeOnSelect: true
-  })
+  }).pickadate('picker').set('select', new Date())
 
   $('.modal').modal()
 
@@ -64,8 +64,11 @@ $(document).ready(function () {
   function getDatapoints (entries, sensor) {
     const datapoints = []
     for (entry of entries) {
-      datapoints.push(entry[sensor])
+      if (typeof entry[sensor] !== 'undefined') {
+        datapoints.push(entry[sensor])
+      }
     }
+    console.log(datapoints)
     return datapoints
   }
 
@@ -92,7 +95,9 @@ $(document).ready(function () {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              suggestedMin: 1,
+              suggestedMax: 5
             }
           }]
         }
@@ -111,12 +116,14 @@ $(document).ready(function () {
     if ((typeof date !== 'undefined') && (typeof station !== 'undefined')) {
       console.log(`fetch from /api/measurments/${station}/${date}`)
 
+      // Materialize.toast(`Get data from station ${station}`, 10000)
+
       fetch(`/api/stations/${station}`)
-        .then(res => res.json())
-        .then(station => {
-          document.getElementById('station-header').innerHTML = `📡 ${station.name}`
-          document.title = `🌧 ${station.name}`
-        })
+      .then(res => res.json())
+      .then(station => {
+        document.getElementById('station-header').innerHTML = `📡 ${station.name}`
+        document.title = `🌧 ${station.name}`
+      })
 
       fetch(`/api/measurments/${station}/${date}`)
       .then(res => res.json())
@@ -131,20 +138,28 @@ $(document).ready(function () {
 
         const waterData = getDatapoints(json, 'water')
         if (waterData.length > 0) {
-          charts.appendChild(makeChartMagic('water', waterChart, dateLabels, waterData, 'Poziom wody'))
+          charts.appendChild(makeChartMagic('water', waterChart, dateLabels, waterData, '💧 Poziom wody'))
         }
 
         const rainData = getDatapoints(json, 'rain')
         if (rainData.length > 0) {
-          charts.appendChild(makeChartMagic('rain', waterChart, dateLabels, rainData, 'Opady deszczu'))
+          charts.appendChild(makeChartMagic('rain', waterChart, dateLabels, rainData, '🌧 Opady deszczu'))
         }
 
         const windData = getDatapoints(json, 'windLevel')
         if (windData.length > 0) {
-          charts.appendChild(makeChartMagic('wind-level', waterChart, dateLabels, windData, 'Siła wiatru'))
+          charts.appendChild(makeChartMagic('wind-level', waterChart, dateLabels, windData, '🍃 Siła wiatru'))
         }
-      }) // end getJSON
+
+        if (charts.innerHTML === '') {
+          charts.innerHTML = '<p class="flow-text">Brak pomiarów</p>'
+        }
+      })
+      // .then(_ => {
+      //   let toastElement = $('.toast').first()[0]
+      //   let toastInstance = toastElement.M_Toast
+      //   toastInstance.remove()
+      // })
     }
-  }) // end date-picker change
-    // CHARTS END
+  })
 })

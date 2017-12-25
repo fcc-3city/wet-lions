@@ -4,7 +4,7 @@ const merge = require('merge')
 
 function sanitize (elt) {
   values = Object.keys(elt).map(key => elt[key])
-  return !(values.every(value => value >= 3999 || value === null))
+  return !(values.every(value => value >= 3800 || value === null))
 }
 
 // expects stationId as number and date as moment.js object

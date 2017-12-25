@@ -3,26 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Mokra Robota</title>
+    <title>Wet Lions</title>
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-    <!-- <link rel="stylesheet" href="css/app.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <style type="text/css">
-    header, main, footer {
-      padding-left: 300px;
+    header,
+    main,
+    footer {
+        padding-left: 300px;
     }
 
-    @media only screen and (max-width : 992px) {
-      header, main, footer {
-        padding-left: 0;
-    }
+    @media only screen and (max-width: 992px) {
+        header,
+        main,
+        footer {
+            padding-left: 0;
+        }
     }
     </style>
-
 </head>
 
 <body>
@@ -37,72 +38,62 @@
                 </li>
                 <!-- <li><a href="#">Share</a></li> -->
             </ul>
-
             <ul id="slide-out" class="side-nav fixed">
-                <li><div class="user-view">
-                  <div class="background indigo">
-                    <!-- <img src="images/office.jpg"> -->
-                  </div>
-                  <a href="#"><h5 class="white-text title">Mokra Robota</h5></a>
-                  <a href="https://github.com/fcc-3city/gd-wody-backend">
+                <li>
+                    <div class="user-view">
+                        <div class="background indigo">
+                            <!-- <img src="images/office.jpg"> -->
+                        </div>
+                        <a href="#"><h5 class="white-text title">Wet Lions</h5></a>
+                        <a href="https://github.com/fcc-3city/gd-wody-backend">
                     <span class="white-text">GitHub</span>
                   </a>
-                </div></li>
-
-
+                    </div>
+                </li>
                 <li><a href="#modal-help" class="modal-trigger" data-target="modal-help">Instrukcja</a></li>
                 <li><a href="#modal-about" class="modal-trigger" data-target="modal-about">O tym czymś</a></li>
-                
-                
-                <li><div class="divider"></div></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
                 <li><a class="subheader">Stacje</a></li>
                 <form id='station-form' class='select-station' action="#"></form>
             </ul>
         </div>
-    </div>
-</nav>
-<main>
-    <div class="container">
-        <div class="charts">
-            <h2 id="station-header">Wybierz stacje</h2>
-            <div id="station-measurments" class="charts">
-              
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="charts">
+                <h2 id="station-header">👈 Wybierz stacje</h2>
+                <div id="station-measurments" class="charts">
+                </div>
             </div>
-            
+        </div>
+    </main>
+    <div id="modal-help" class="modal modal-fixed-footer">
+        <div class="modal-content flow-text">
+            <h4>Jak to używać?</h4>
+            <p>Jeżeli musisz w to zaglądać to popełniliśmy błąd przy projektowaniu tej aplikacji. Z bocznego menu wybierz stację która ciebie interesuje. Z górnego po prawej wybierz datę. Coś powinno się wyświetlić.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
         </div>
     </div>
-</main>
-
-  <div id="modal-help" class="modal modal-fixed-footer">
-    <div class="modal-content flow-text">
-      <h4>Jak to używać?</h4>
-      <p>Jeżeli musisz w to zaglądać to popełniliśmy błąd przy projektowaniu tej aplikacji. Z bocznego menu wybierz stację która ciebie interesuje. Z górnego po prawej wybierz datę. Coś powinno się wyświetlić.</p>
+    <div id="modal-about" class="modal modal-fixed-footer">
+        <div class="modal-content flow-text">
+            <h4>Co to jest?</h4>
+            <p>Jest to prosta aplikacja napisana w node.js przez ludzi kręcących się po <a href="//hs3.pl">Hackerspace Trójmiasto</a> przy okazji robienia kursu freeCodeCamp.</p>
+            <h5>Dane</h5>
+            <p>Dane do działania są zaciągane z <a href="http://pomiary.gdmel.pl/rest">RESTowego API przedsiębiorstwa Gdańskie Wody Sp. z o.o.</a></p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
+        </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
-    </div>
-  </div>
-
-
-  <div id="modal-about" class="modal modal-fixed-footer">
-    <div class="modal-content flow-text">
-      <h4>Co to jest?</h4>
-      <p>Jest to prosta aplikacja napisana w node.js przez ludzi kręcących się po <a href="//hs3.pl">Hackerspace Trójmiasto</a> przy okazji robienia kursu freeCodeCamp.</p>
-      <h5>Dane</h5>
-      <p>Dane do działania są zaciągane z <a href="http://pomiary.gdmel.pl/rest">RESTowego API przedsiębiorstwa Gdańskie Wody Sp. z o.o.</a></p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Ok</a>
-    </div>
-  </div>
-
-
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<script src="/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 
 </html>
