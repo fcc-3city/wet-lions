@@ -12,10 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-// TODO: docs
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(express.static('public')) // serve static files
 
 app.use('/api/stations', stations);
 app.use('/api/measurments', measurments);
