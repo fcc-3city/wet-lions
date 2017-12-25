@@ -92,14 +92,8 @@ $(document).ready(function () {
         }]
       },
       options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              suggestedMin: 1,
-              suggestedMax: 5
-            }
-          }]
+        elements: {
+          line: {cubicInterpolationMode: 'monotone'}
         }
       }
     })
