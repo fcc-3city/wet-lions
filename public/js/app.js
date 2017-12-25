@@ -16,12 +16,11 @@ $(document).ready(function () {
   })
 
   $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 5, // Creates a dropdown of 15 years to control year,
-        // format: 'yyyy-mm-dd',
+    selectMonths: true,
+    selectYears: 5,
+    // format: 'yyyy-mm-dd',
     formatSubmit: 'yyyy-mm-dd',
     hiddenPrefix: 'date',
-        // hiddenName: true,
     today: 'Dziś',
     clear: 'Wyczyść',
     close: 'Ok',
@@ -32,14 +31,22 @@ $(document).ready(function () {
 
     // END MATERIALIZE JQUERY
 
+  let waterChart
+  let windChart
+  let rainChart
+
   function populateSideNav () {
         // Populate select tag with station names and define whether they're active
-    $.getJSON('/api/stations', json => {
-      for (station of json) {
+    fetch('/api/stations')
+    .then(res => res.json())
+    .then(stations => {
+      for (station of stations) {
         $('#station-form')
                     .append(`<li>
             <input id=${station.id}_station value=${station.id} name='station' type='radio'/>
-            <label for=${station.id}_station>${station.active == true ? '🌧' : '🌤'} ${station.name}</label>
+            <label for=${station.id}_station>
+              ${station.active == true ? '🌧' : '🌤'} ${station.name}
+            </label>
             </li>`)
       };
     })
@@ -54,13 +61,13 @@ $(document).ready(function () {
     if (typeof date !== 'undefined' && typeof station !== 'undefined') {
       console.log(`/api/measurments/${station}/${date}`)
       $.getJSON(`/api/measurments/${station}/${date}`, json => {
+        console.log(json)
         function parseDate () {
           const labels = []
           for (entry of json) {
             let date = new Date(entry.date)
-            const leadingZero = (num) => `0${num}`.slice(-2)
             const labelDate = [date.getHours(), date.getMinutes()]
-                            .map(leadingZero)
+                            .map((num) => `0${num}`.slice(-2))
                             .join(':')
             // console.log(labelDate)
             labels.push(labelDate)
@@ -102,7 +109,7 @@ $(document).ready(function () {
                 // WATER LEVEL CHART
 
         const ctx = document.getElementById('water-level').getContext('2d')
-        const waterChart = new Chart(ctx, {
+        waterChart = new Chart(ctx, {
           type: 'line',
           data: {
             labels: parseDate(),
@@ -127,7 +134,7 @@ $(document).ready(function () {
 
                 // WIND SPEED CHART
         const ctw = document.getElementById('wind-speed').getContext('2d')
-        const windChart = new Chart(ctw, {
+        windChart = new Chart(ctw, {
           type: 'line',
           data: {
             labels: parseDate(),
