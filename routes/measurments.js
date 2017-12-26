@@ -5,7 +5,7 @@ const router = express.Router()
 const fetchMeasurments = require('../controllers/measurments')
 
 router.get('/', (req, res) => {
-  res.send('measurments, specify stationId and date')
+  res.status(510).send('measurments, specify stationId and date')
 })
 
 router.get('/:stationId/:date', (req, res) => {
@@ -16,7 +16,7 @@ router.get('/:stationId/:date', (req, res) => {
 
 // TODO: Range
 router.get('/:stationId/:dateStart/:dateEnd', (req, res) => {
-  req.send('not implemented')
+  req.status(501).send('not implemented')
 })
 
 module.exports = router

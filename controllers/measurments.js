@@ -11,18 +11,18 @@ function sanitize (elt) {
 function fetchMeasurments (stationId, date) {
   const dateStr = date.format('YYYY-MM-DD')
   return Promise.all([
-    fetchMeasurmentsFromSensor(stationId, 'rain', dateStr),
-    fetchMeasurmentsFromSensor(stationId, 'water', dateStr),
-    fetchMeasurmentsFromSensor(stationId, 'windDir', dateStr),
-    fetchMeasurmentsFromSensor(stationId, 'windLevel', dateStr)
+    _fetchMeasurmentsFromSensor(stationId, 'rain', dateStr),
+    _fetchMeasurmentsFromSensor(stationId, 'water', dateStr),
+    _fetchMeasurmentsFromSensor(stationId, 'windDir', dateStr),
+    _fetchMeasurmentsFromSensor(stationId, 'windLevel', dateStr)
   ])
     .then(sensors => [].concat(...sensors))
     .then(data => data.filter(elt => sanitize(elt)))
     .then(data => groupByDate(data, stationId))
 }
 
-function fetchMeasurmentsFromSensor (stationId, sensor, date) {
-  return fetch(`http://pomiary.gdmel.pl/rest/measurments/${stationId + 1}/${sensor.toLowerCase()}/${date}`)
+function _fetchMeasurmentsFromSensor (stationId, sensor, date) {
+  return fetch(`http://pomiary.gdmel.pl/rest/measurments/${stationId}/${sensor.toLowerCase()}/${date}`)
     .then(res => res.json())
     .then(json => json.data.map(record => ({
       'date': moment(record[0]),
