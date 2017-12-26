@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch')
 
-function fetchStations() {
+function fetchStations () {
   return fetch('http://pomiary.gdmel.pl/rest/stations')
     .then(res => res.json())
     .then(json => json.data)
@@ -8,10 +8,9 @@ function fetchStations() {
     .then(result => result.sort((a, b) => a.id - b.id))
 }
 
-function stationToModel(data) {
+function stationToModel (data) {
   return {
-    id: data.no - 1,
-    externalId: data.no,
+    id: data.no,
     name: data.name,
     active: data.active,
     sensors: {
@@ -20,7 +19,7 @@ function stationToModel(data) {
       windDir: data.winddir,
       windLevel: data.windlevel
     }
-  };
+  }
 }
 
 module.exports = fetchStations

@@ -11,13 +11,12 @@ router.get('/', (req, res) => {
 router.get('/:stationId/:date', (req, res) => {
   console.log('fetchMeasurments', req.params)
   fetchMeasurments(Number(req.params.stationId), moment(req.params.date))
-    .then(data => res.json(data))
+  .then(data => res.json(data))
 })
 
 // TODO: Range
 router.get('/:stationId/:dateStart/:dateEnd', (req, res) => {
   req.send('not implemented')
 })
-
 
 module.exports = router
