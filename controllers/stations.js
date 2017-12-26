@@ -1,11 +1,17 @@
 const fetch = require('node-fetch')
+const cache = require('memory-cache')
 
 function fetchStations () {
-  return fetch('http://pomiary.gdmel.pl/rest/stations')
+  const cached = cache.get('stations')
+  return cached !== null ? Promise.resolve(cached) : fetch('http://pomiary.gdmel.pl/rest/stations')
     .then(res => res.json())
     .then(json => json.data)
-    .then(result => result.map(station => stationToModel(station)))
-    .then(result => result.sort((a, b) => a.id - b.id))
+    .then(data => data.map(station => stationToModel(station)))
+    .then(data => data.sort((a, b) => a.id - b.id))
+    .then(data => {
+      cache.put('stations', data, 100000)
+      return data
+    })
 }
 
 function stationToModel (data) {

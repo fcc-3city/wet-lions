@@ -2,6 +2,8 @@ const fetch = require('node-fetch')
 const moment = require('moment')
 const merge = require('merge')
 
+const cache = require('memory-cache')
+
 function sanitize (elt) {
   values = Object.keys(elt).map(key => elt[key])
   return !(values.every(value => value >= 3800 || value === null))
@@ -10,7 +12,11 @@ function sanitize (elt) {
 // expects stationId as number and date as moment.js object
 function fetchMeasurments (stationId, date) {
   const dateStr = date.format('YYYY-MM-DD')
-  return Promise.all([
+  const key = `${stationId}/${dateStr}`
+
+  const cached = cache.get(key)
+  // console.log(key, cached !== null, cache.memsize())
+  return cached !== null ? Promise.resolve(cached) : Promise.all([
     _fetchMeasurmentsFromSensor(stationId, 'rain', dateStr),
     _fetchMeasurmentsFromSensor(stationId, 'water', dateStr),
     _fetchMeasurmentsFromSensor(stationId, 'windDir', dateStr),
@@ -19,6 +25,10 @@ function fetchMeasurments (stationId, date) {
     .then(sensors => [].concat(...sensors))
     .then(data => data.filter(elt => sanitize(elt)))
     .then(data => groupByDate(data, stationId))
+    .then(data => {
+      cache.put(key, data, 100000)
+      return data
+    })
 }
 
 function _fetchMeasurmentsFromSensor (stationId, sensor, date) {
