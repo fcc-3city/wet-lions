@@ -6,7 +6,7 @@ const stations = require('./routes/stations')
 const measurments = require('./routes/measurments')
 
 const cache = require('memory-cache')
-cache.debug(true)
+// cache.debug(true)
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())

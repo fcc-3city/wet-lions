@@ -12,14 +12,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:stationId/:date', (req, res) => {
-  console.log('fetchMeasurments', req.params)
+  // console.log('fetchMeasurments', req.params)
 
   fetchMeasurments(Number(req.params.stationId), moment(req.params.date))
   .then(data => res.json(data))
 })
 
 router.get('/:stationId/:dateStart/:dateEnd', (req, res) => {
-  console.log('fetchMeasurments', req.params)
+  // console.log('fetchMeasurments', req.params)
 
   const stationId = Number(req.params.stationId)
   const dateRange = moment.range(req.params.dateStart, req.params.dateEnd)
