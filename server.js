@@ -5,20 +5,14 @@ const app = express()
 const stations = require('./routes/stations')
 const measurments = require('./routes/measurments')
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
-// app.use(express.static('public')) // serve static files
+app.use(express.static('public'))
 
 app.use('/api/stations', stations)
 app.use('/api/measurments', measurments)
 
-// TODO: env var, nie mają sensu tak wcześnie, ale niech będzie
-// const PORT = 3000;
 app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT}`)
 })
