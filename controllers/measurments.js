@@ -1,12 +1,13 @@
-const fetch = require('node-fetch')
+const axios = require('axios')
 const moment = require('moment')
 const merge = require('merge')
 
 const cache = require('memory-cache')
 
 function sanitize (elt) {
-  values = Object.keys(elt).map(key => elt[key])
-  return !(values.every(value => value >= 3800 || value === null))
+  return !(Object.keys(elt)
+    .map(key => elt[key])
+    .every(value => value >= 3800 || value === null))
 }
 
 // expects stationId as number and date as moment.js object
@@ -32,13 +33,14 @@ function fetchMeasurments (stationId, date) {
 }
 
 function _fetchMeasurmentsFromSensor (stationId, sensor, date) {
-  return fetch(`http://pomiary.gdmel.pl/rest/measurments/${stationId}/${sensor.toLowerCase()}/${date}`)
-    .then(res => res.json())
+  return axios.get(`http://pomiary.gdmel.pl/rest/measurments/${stationId}/${sensor.toLowerCase()}/${date}`)
+    .then(res => res.data)
     .then(json => json.data.map(record => ({
       'date': moment(record[0]),
       [sensor]: record[1]
     })))
     .then(data => data)
+    .catch(function (error) { console.log(error) })
 }
 
 function groupByDate (arr, stationId) {
