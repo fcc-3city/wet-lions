@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
     <style>
+
     .sparkline {
         fill: none;
         stroke: #000;
@@ -23,6 +24,9 @@
         stroke-width: 0.5px;
     }
 
+    .sparkline-td  {
+        padding-bottom: 0 !important; 
+    }
     .sparkcircle {
         fill: #f00;
         stroke: none;
@@ -37,28 +41,27 @@
     <div class="container">
         <h1>Pomiary</h1>
         <div class="card">
-            
-        <div class="card-body">
-            <div class="row">
-                <div class="form-group col">
-                    <label for="daterange">Zakres danych</label>
-                    <input id="daterange" type="text" name="daterange" class="form-control">
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="daterange">Zakres danych</label>
+                        <input id="daterange" type="text" name="daterange" class="form-control">
+                    </div>
+                    <div class="form-group col">
+                        <label for="sensortype">Typ danych</label>
+                        <select class="form-control" id="sensortype" disabled>
+                            <option>water</option>
+                            <option>rain</option>
+                            <option>windLevel</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col"> 
-                  <label for="sensortype">Typ danych</label>
-                  <select class="form-control" id="sensortype" disabled>
-                    <option>water</option>
-                    <option>rain</option>
-                    <option>windLevel</option>
-                  </select>
-                </div>
+                <button type="" class="btn btn-primary">Wyświetl</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+                    About
+                </button>
             </div>
-            <button type="" class="btn btn-primary">Wyświetl</button>
-        <!-- Button trigger modal -->
-<button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
-  About
-</button>
-        </div>
         </div>
         <br>
         <table class="table">
@@ -72,31 +75,29 @@
             <tbody>
             </tbody>
         </table>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">About</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Maintainer <a href="https://github.com/not7cd">@not7cd</a>.
-        <ul>
-            <li><a href="https://github.com/not7cd/wet-lions">GitHub</a></li>
-            <li><a href="https://glitch.com/edit/#!/wet-lions">Glitch</a></li>
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">About</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Maintainer <a href="https://github.com/not7cd">@not7cd</a>.
+                        <ul>
+                            <li><a href="https://github.com/not7cd/wet-lions">GitHub</a></li>
+                            <li><a href="https://glitch.com/edit/#!/wet-lions">Glitch</a></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

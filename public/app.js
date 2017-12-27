@@ -50,7 +50,7 @@ $(document).ready(_ => {
     var svg = d3.select(elemId)
             .html('')
             .append('svg')
-            .attr('width', width)
+            .attr('width', 'auto')
             .attr('height', height)
             .append('g')
             .attr('transform', 'translate(0, 2)')
@@ -87,7 +87,7 @@ $(document).ready(_ => {
             table.append(`<tr id="station_${station.id}">
                 <th scope="row">${station.id}</th>
                 <td>${station.active == true ? '🌧' : '🌤'} ${station.name}</td>
-                <td><span id="water_${station.id}"></span></td>
+                <td class="sparkline-td"><span id="water_${station.id}"></span></td>
                 </tr>`)
           }
           return stations
