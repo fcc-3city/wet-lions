@@ -1,8 +1,8 @@
 const axios = require('axios')
 const moment = require('moment')
 const merge = require('merge')
-const flatten = array => [].concat(...array)
 const defaultError = require('../utility/defaultError')
+const flatten = array => [].concat(...array)
 
 const cache = require('memory-cache')
 
@@ -29,7 +29,11 @@ function fetchMeasurments (stationId, date) {
     .then(data => data.filter(elt => sanitize(elt)))
     .then(data => groupByDate(data, stationId))
     .then(data => {
-      cache.put(key, data, 100000)
+      if (moment().format('YYYY-MM-DD') === dateStr) {
+        cache.put(key, data, 100000)
+      } else {
+        cache.put(key, data)
+      }
       return data
     })
 }
