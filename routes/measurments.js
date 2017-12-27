@@ -5,6 +5,8 @@ const momentBase = require('moment')
 const momentRange = require('moment-range')
 const moment = momentRange.extendMoment(momentBase)
 
+const flatten = array => [].concat(...array)
+
 const fetchMeasurments = require('../controllers/measurments')
 
 router.get('/', (req, res) => {
@@ -22,15 +24,10 @@ router.get('/:stationId/:dateStart/:dateEnd', (req, res) => {
   // console.log('fetchMeasurments', req.params)
 
   const stationId = Number(req.params.stationId)
-  const dateRange = moment.range(req.params.dateStart, req.params.dateEnd)
+  const dateRange = Array.from(moment.range(req.params.dateStart, req.params.dateEnd).by('day'))
 
-  let promises = []
-  for (let day of dateRange.by('day')) {
-    promises.push(fetchMeasurments(stationId, day))
-  }
-
-  Promise.all(promises)
-  .then(measurments => [].concat(...measurments))
+  Promise.all(dateRange.map(day => fetchMeasurments(stationId, day)))
+  .then(measurments => flatten(measurments))
   .then(result => res.json(result))
 })
 

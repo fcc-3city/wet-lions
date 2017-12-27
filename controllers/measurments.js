@@ -1,6 +1,8 @@
 const axios = require('axios')
 const moment = require('moment')
 const merge = require('merge')
+const flatten = array => [].concat(...array)
+const defaultError = require('../utility/defaultError')
 
 const cache = require('memory-cache')
 
@@ -23,7 +25,7 @@ function fetchMeasurments (stationId, date) {
     _fetchMeasurmentsFromSensor(stationId, 'windDir', dateStr),
     _fetchMeasurmentsFromSensor(stationId, 'windLevel', dateStr)
   ])
-    .then(sensors => [].concat(...sensors))
+    .then(sensors => flatten(sensors))
     .then(data => data.filter(elt => sanitize(elt)))
     .then(data => groupByDate(data, stationId))
     .then(data => {
@@ -40,7 +42,7 @@ function _fetchMeasurmentsFromSensor (stationId, sensor, date) {
       [sensor]: record[1]
     })))
     .then(data => data)
-    .catch(function (error) { console.log(error) })
+    .catch(e => defaultError(e))
 }
 
 function groupByDate (arr, stationId) {
