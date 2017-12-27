@@ -86,11 +86,18 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Maintainer <a href="https://github.com/not7cd">@not7cd</a>.
+                        <p>  
+                        Maintainer: <a href="https://twitter.com/not7cd">@not7cd</a>.
                         <ul>
+                        <li><a href="https://github.com/not7cd/wet-lions/graphs/contributors">Contributors</a></li>
                             <li><a href="https://github.com/not7cd/wet-lions">GitHub</a></li>
-                            <li><a href="https://glitch.com/edit/#!/wet-lions">Glitch</a></li>
+                            <li><a href="http://not7cd.net">not7cd homepage</a></li>
                         </ul>
+                        </p>
+                        <p>Dane pobierane są z <a href="http://pomiary.gdmel.pl/">API Gdańskich Wód</a>.</p>
+                        <p>Jeżeli coś nie działa to ich serwer dostał zadyszki i rzuca 502-ki. Z resztą cudem jest to, że to działa. Generalnie jest to proof of concept i ćwiczenie tworzenia aplikacji. Pod spodem zostało stworzone API które działa jako pośrednik dla frontu. Ukrywa ono złe kody błędu i różne dziwne praktyki serwowane przez <a href="http://pomiary.gdmel.pl/rest">pomiary.gdmel.pl/rest</a>.</p>
+                        <p>Niestety, aby pobrać dane z jednej stacji np. z tygodnia nasz pośrednik wykonuje 7 * 4 zapytań. Co oznacza, że Gdańskie Wody Sp. z o.o. otrzymuje około 2800 zapytań w chwili załadowania pierwszej strony. Dla frontu to tylko 94 zapytania, czyli tyle ile jest stacji.</p>
+                        <p>Przepraszam.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

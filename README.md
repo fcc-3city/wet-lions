@@ -1,4 +1,4 @@
-# Backend Sample Text
+# wet-lions
 
 Projekt trójmieskiego freeCodeCamp
 
@@ -9,16 +9,12 @@ Jeżeli jesteś dodany jako kolabolator wystarczy że sklonujesz to repozytorium
 
 1. **Zainstaluj**
   ```bash
-git clone https://github.com/fcc-3city/gd-wody-backend.git
-cd gd-wody-backend
+git clone https://github.com/not7cd/wet-lions.git
+cd wet-lions
 npm install
   ```
 2. **Zacznij pracę**  
-  `npm start` uruchamia serwer na localhost:3000
+  `PORT=3000 npm start` uruchamia serwer na localhost:3000
 
-### Dokumentacja:
-Cele zamierzenia i marzenia: [Trello](https://trello.com/b/DMLojtTj/melioracja)
+- [Dokumentacja API](docs/api.md)
 
-- [API](docs/api.md)
-
-_Będę wdzięczny za dokumentacje i zamierzenia_
