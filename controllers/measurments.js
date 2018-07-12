@@ -39,7 +39,7 @@ function fetchMeasurments (stationId, date) {
 }
 
 function _fetchMeasurmentsFromSensor (stationId, sensor, date) {
-  return axios.get(`http://pomiary.gdmel.pl/rest/measurments/${stationId}/${sensor.toLowerCase()}/${date}`)
+  return axios.get(`https://pomiary.gdanskiewody.pl/rest/measurments/${stationId}/${sensor.toLowerCase()}/${date}`)
     .then(res => res.data)
     .then(json => json.data.map(record => ({
       'date': moment(record[0]),
