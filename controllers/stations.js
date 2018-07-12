@@ -7,7 +7,7 @@ const putToCache = (data, key) => {
 
 function getStations () {
   const cached = cache.get('stations')
-  return cached !== null ? Promise.resolve(cached) : axios.get('http://pomiary.gdmel.pl/rest/stations')
+  return cached !== null ? Promise.resolve(cached) : axios.get('https://pomiary.gdanskiewody.pl/rest//stations')
     .then(res => res.data)
     .then(json => json.data)
     .then(data => data.map(station => stationToModel(station)))
